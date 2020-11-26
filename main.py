@@ -18,13 +18,14 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if 'roh' in message.content.lower().split(' '):
+    if 'roh' in message.content.lower():
         running = True
         running_ct = 0
     
     if (running_ct > 10 and random.randint(0,20) == 15) or ('bye' in message.content and running):
         running = False
         await message.channel.send('Bye.')
+        bot._store()
 
     if message.channel.id in allowed_channels and running:   
         await message.channel.send(bot.interpret(message.content))
